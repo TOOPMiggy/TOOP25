@@ -1,0 +1,46 @@
+#include <Arduino.h>
+#include <Pololu3piPlus32U4.h>
+#include <Pololu3piPlus32U4IMU.h>
+
+using namespace Pololu3piPlus32U4;
+OLED dis;
+
+class ExampleRobot {
+private:
+  String line1;
+
+public:
+  ExampleRobot() {
+    // Constructor
+    dis.init();
+    dis.setLayout21x8();
+    dis.gotoXY(0,0);
+    dis.print(F("Initializing! Don't touch"));
+    delay(1000);
+    dis.clear();
+  }
+
+  void setLine(String newLine) {
+    // Set the contents of line1
+    line1 = newLine;
+  }
+
+  void dispLine() {
+    // Display line1 on the OLED screen
+    dis.clear();
+    dis.print(line1);
+  }
+};
+
+ExampleRobot exampleRobot;
+
+void setup() {
+  // Set line1 to "Go Bears!"
+  exampleRobot.setLine("Go Bears!");
+}
+
+void loop() {
+  
+  exampleRobot.dispLine();
+  delay(1000); 
+}
